@@ -16,14 +16,14 @@ void inputarray(int a[], int n, char* filename)
     }
 }
 
-void GenerateSortedData(int a[], int n)
+void GenerateSortedData(int*& a, int& n)
 {
     cin >> n;
     a = new int[n+1];
 	a[0] = 0;
     for (int i = 1; i <= n; i++)
 	{
-		a[i] = (rand() + a[i-1]) % n;
+		a[i] = rand() % n + a[i-1];
 	}
     for (int i = 1; i <= n; i++)
     {
@@ -83,6 +83,6 @@ void output(searchingalgorithms S, int a[], int n, int x)
     }
     else
     {
-        cout << "Don't find any " << x << " in the array!";
+        cout << "Don't find any " << x << " in the array!" << endl;
     }
 }
