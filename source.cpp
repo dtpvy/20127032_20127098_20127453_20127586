@@ -4,6 +4,7 @@ using namespace std;
 
 int main()
 {
+    // Test gitignore 
     int n, *a;
     GenerateSortedData(a, n);
     output(Fibonaccisearch, a, n, a[5]);
