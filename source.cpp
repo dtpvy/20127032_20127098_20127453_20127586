@@ -4,10 +4,10 @@ using namespace std;
 
 int main()
 {
-    // Test gitignore 
     int n, *a;
-    GenerateSortedData(a, n);
-    output(Fibonaccisearch, a, n, a[5]);
-    cout << runningtime(Fibonaccisearch, a, n, a[n/2]);
+    //GenerateSortedData(a, n);
+    inputarray(a, n, "input.txt");
+    output(Fibonaccisearch, a, n, 50);
+    //cout << runningtime(Fibonaccisearch, a, n, a[n/2]);
     return 0;
 }

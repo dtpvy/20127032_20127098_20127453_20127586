@@ -5,7 +5,7 @@
 
 using namespace std;
 
-void inputarray(int a[], int n, char* filename)
+void inputarray(int*& a, int& n, const char* filename)
 {
     fstream fi(filename, ios::in);
     fi >> n;
@@ -44,10 +44,10 @@ int Fibonaccisearch(int a[], int n, int x)
         fib2 = fib;
         fib = fib1 + fib2;
     }
+    cout << fib << endl;
     int offset = 0;
     while (fib > 1) {
         int i = min(offset + fib1, n);
-
         if (a[i] < x) {
             fib = fib2;
             fib2 = fib1;
