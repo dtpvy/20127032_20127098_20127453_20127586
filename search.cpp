@@ -2,7 +2,7 @@
 #include "search.h"
 #include <time.h>
 #include <fstream>
-
+#define oo 1000000007
 using namespace std;
 
 void inputarray(int*& a, int& n, const char* filename)
@@ -23,13 +23,9 @@ void GenerateSortedData(int*& a, int& n)
 	a[0] = 0;
     for (int i = 1; i <= n; i++)
 	{
-		a[i] = rand() % n + a[i-1];
+        int x = rand() % n;
+        a[i] = (x >= a[i-1]) ? x : a[i-1] + rand() % 100;
 	}
-    for (int i = 1; i <= n; i++)
-    {
-        cout << a[i] << " ";
-    }
-    cout << endl;
 }
 
 int Fibonaccisearch(int a[], int n, int x)
@@ -44,7 +40,6 @@ int Fibonaccisearch(int a[], int n, int x)
         fib2 = fib;
         fib = fib1 + fib2;
     }
-    cout << fib << endl;
     int offset = 0;
     while (fib > 1) {
         int i = min(offset + fib1, n);
@@ -71,6 +66,7 @@ int runningtime(searchingalgorithms S, int a[], int n, int x)
     int start_t = clock();
     S(a, n, x);
     int end_t = clock();
+    cout << start_t << " " << end_t << endl;
     return end_t - start_t;
 }
 
