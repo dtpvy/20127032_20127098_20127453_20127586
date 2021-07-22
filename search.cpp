@@ -46,7 +46,7 @@ int Fibonaccisearch(int a[], int n, int key)
         int i = min(flag + fib1, n);
         if (a[i] == key) return i; //found the key in the array
         if (a[i] < key) {
-            //the key belongs in the range from fib1 to fib2 so the subarray is considered to have fib2 elements
+            //the key belongs in the range from i to fib so the subarray is considered to have fib2 elements
             fib = fib2; //i'th fibonacci
             fib2 = fib1; //i-1'th fibonacci
             fib1 = fib - fib2; //i-2'th fibonacci
