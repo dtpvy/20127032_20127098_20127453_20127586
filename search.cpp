@@ -30,6 +30,37 @@ void GenerateSortedData(int*& a, int& n)
     cout << endl;
 }
 
+//jumpSearch
+int jumpSearch(int a[], int n, int x) {
+    int step = sqrt(n);	//step is sqrt of n . example: n=9--> step =3   n=15--> step=3
+    int prev = 0;  //prev is the variable to save the starting position
+    //find element x
+    int jump = step;
+    while (a[jump - 1] < x)
+    {
+        prev = jump;
+        jump += step;
+        if (jump > n)
+            jump = n;
+
+        if (prev >= n)
+            return -1;
+    }
+    int mid;
+    while (prev <= jump)
+    {
+        mid = (prev + jump) / 2;
+
+        if (a[mid] == x)	return mid;
+        // if x > a[mid] , x will just to the right of mid
+        if (x > a[mid])
+            prev = mid + 1;
+        else		// else x<a[mid] , x will just to the left of mid
+            jump = mid - 1;
+    }
+
+}
+
 int Fibonaccisearch(int a[], int n, int key)
 {
   
