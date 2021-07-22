@@ -41,7 +41,7 @@ int Fibonaccisearch(int a[], int n, int key)
         fib2 = fib; //i-1'th fibonacci
         fib = fib1 + fib2; //i'th fibonacci
     }
-    int flag = 0; //mark the left position
+    int flag = 1; //mark the left position
     while (fib > 1) {
         int i = min(flag + fib1, n);
         if (a[i] == key) return i; //found the key in the array

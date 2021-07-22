@@ -10,8 +10,7 @@ int main()
     int n, *a;
     GenerateSortedData(a, n);
     int x = rand() % n + 1;
-    cout << x << endl;
-    cout << runningtime(Fibonaccisearch, a, n, a[x]) << endl;
-    output(Fibonaccisearch, a, n, a[x]);
+    cout << runningtime(Fibonaccisearch, a, n, a[n]) << endl;
+    output(Fibonaccisearch, a, n, a[n]);
     return 0;
 }
