@@ -25,7 +25,9 @@ void GenerateSortedData(int*& a, int& n)
 	{
         int x = rand() % n;
         a[i] = (x >= a[i-1]) ? x : a[i-1] + rand() % 100;
+        cout << a[i] << " ";
 	}
+    cout << endl;
 }
 
 int Fibonaccisearch(int a[], int n, int key)
@@ -53,14 +55,12 @@ int Fibonaccisearch(int a[], int n, int key)
             flag = i; //the left position is now i
         }
         else {
-            //the key belongs in the range from flag to fib1 so the subarray is considered to have fib1 elements 
+            //the key belongs in the range from flag to flat+fib1-1 so the subarray is considered to have fib1 elements 
             fib = fib1; //i'th fibonacci
             fib2 = fib2 - fib1; //i-1'th fibonacci
             fib1 = fib - fib2; //i-2'th fibonacci
         }
     }
-    if (fib2 && a[flag] == key)
-        return flag;
     return -1;
 }
 

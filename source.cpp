@@ -9,8 +9,8 @@ int main()
     srand(time(NULL));
     int n, *a;
     GenerateSortedData(a, n);
-    int x = rand() % n + 1;
-    cout << runningtime(Fibonaccisearch, a, n, a[n]) << endl;
-    output(Fibonaccisearch, a, n, a[n]);
+    int x = a[n-2];
+    cout << runningtime(Fibonaccisearch, a, n, x) << endl;
+    output(Fibonaccisearch, a, n, x);
     return 0;
 }
