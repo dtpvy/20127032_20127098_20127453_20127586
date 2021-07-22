@@ -28,36 +28,39 @@ void GenerateSortedData(int*& a, int& n)
 	}
 }
 
-int Fibonaccisearch(int a[], int n, int x)
+int Fibonaccisearch(int a[], int n, int key)
 {
-    int fib1 = 0;
-    int fib2 = 1;
-    int fib = fib1 + fib2;
-
+  
+    int fib1 = 0; // 0'th fibonacci = 0
+    int fib2 = 1; //1'st fibonacci  = 1
+    int fib = fib1 + fib2; //2'nd fibonacci  = 1
+    //find i'th fibonacci is smallest and greater than or equal to n to divide the array into 2 parts i-1'th fibonacci elements and i-2'th fibonacci elements
     while (fib < n)
     {
-        fib1 = fib2;
-        fib2 = fib;
-        fib = fib1 + fib2;
+        fib1 = fib2; //i-2'th fibonacci
+        fib2 = fib; //i-1'th fibonacci
+        fib = fib1 + fib2; //i'th fibonacci
     }
-    int offset = 0;
+    int flag = 0; //mark the left position
     while (fib > 1) {
-        int i = min(offset + fib1, n);
-        if (a[i] < x) {
-            fib = fib2;
-            fib2 = fib1;
-            fib1 = fib - fib2;
-            offset = i;
+        int i = min(flag + fib1, n);
+        if (a[i] == key) return i; //found the key in the array
+        if (a[i] < key) {
+            //the key belongs in the range from fib1 to fib2 so the subarray is considered to have fib2 elements
+            fib = fib2; //i'th fibonacci
+            fib2 = fib1; //i-1'th fibonacci
+            fib1 = fib - fib2; //i-2'th fibonacci
+            flag = i; //the left position is now i
         }
-        else if (a[i] > x) {
-            fib = fib1;
-            fib2 = fib2 - fib1;
-            fib1 = fib - fib2;
+        else {
+            //the key belongs in the range from flag to fib1 so the subarray is considered to have fib1 elements 
+            fib = fib1; //i'th fibonacci
+            fib2 = fib2 - fib1; //i-1'th fibonacci
+            fib1 = fib - fib2; //i-2'th fibonacci
         }
-        else return i;
     }
-    if (fib2 && a[offset] == x)
-        return offset;
+    if (fib2 && a[flag] == key)
+        return flag;
     return -1;
 }
 
@@ -66,7 +69,6 @@ int runningtime(searchingalgorithms S, int a[], int n, int x)
     int start_t = clock();
     S(a, n, x);
     int end_t = clock();
-    cout << start_t << " " << end_t << endl;
     return end_t - start_t;
 }
 
