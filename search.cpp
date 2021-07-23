@@ -5,17 +5,6 @@
 #define oo 1000000007
 using namespace std;
 
-void inputarray(int*& a, int& n, const char* filename)
-{
-    fstream fi(filename, ios::in);
-    fi >> n;
-    a = new int[n+1];
-    for (int i = 1; i <= n; i++)
-    {
-        fi >> a[i];
-    }
-}
-
 void GenerateSortedData(int*& a, int& n)
 {
     cin >> n;
