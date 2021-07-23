@@ -21,13 +21,11 @@ void GenerateSortedData(int*& a, int& n)
     cin >> n;
     a = new int[n+1];
 	a[0] = 0;
-    for (int i = 1; i <= n; i++)
+    for (int i = 0; i <= n; i++)
 	{
         int x = rand() % n;
         a[i] = (x >= a[i-1]) ? x : a[i-1] + rand() % 100;
-        cout << a[i] << " ";
 	}
-    cout << endl;
 }
 
 //jumpSearch
@@ -61,9 +59,34 @@ int jumpSearch(int a[], int n, int x) {
 
 }
 
+int BinarySearch(int* a, int l, int r, int k) {
+    while (l <= r) {
+        int m = (l + r) / 2;
+        if (a[m] == k)
+            return m;
+        if (k > a[m])
+            l = m + 1;
+        else
+            r = m - 1;
+    }
+    //if we can't find the elements, return -1
+    return -1;
+}
+
+int ExponetialSearch(int* a, int n, int k) {       //array must be sorted in ascending order
+    if (a[0] == k)
+        return 0;
+    int i = 1;
+
+    while (i < n && a[i] < k)
+        i *= 2;
+    // l = i / 2 because at that index, the elements: a[i] < k
+    //call min(i, n - 1) to prevent out of bound
+    return BinarySearch(a, i / 2, min(i, n - 1), k);
+}
+
 int Fibonaccisearch(int a[], int n, int key)
 {
-  
     int fib1 = 0; // 0'th fibonacci = 0
     int fib2 = 1; //1'st fibonacci  = 1
     int fib = fib1 + fib2; //2'nd fibonacci  = 1
