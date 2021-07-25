@@ -5,15 +5,31 @@
 #define oo 1000000007
 using namespace std;
 
-void GenerateSortedData(int*& a, int& n)
+void input(int*& a, int& n, int& key, int*& b)
 {
-    cin >> n;
-    a = new int[n+1];
-	a[0] = 0;
-    for (int i = 0; i <= n; i++)
+    cout << "Enter n, key: ";
+    cin >> n >> key;
+    cout << "Enter elements of the array: ";
+    a = new int[n];
+    b = new int[n + 1];
+    for (int i = 0; i < n; i++)
+    {
+        cin >> a[i];
+        b[i + 1] = a[i];
+    }
+}
+
+void GenerateSortedData(int*& a, int*& b, int& n)
+{
+    a = new int[n];
+    b = new int[n+1];
+    a[0] = rand() % n;
+    b[1] = a[0];
+    for (int i = 1; i < n; i++)
 	{
         int x = rand() % n;
         a[i] = (x >= a[i-1]) ? x : a[i-1] + rand() % 100;
+        b[i + 1] = a[i];
 	}
 }
 
@@ -45,7 +61,6 @@ int jumpSearch(int a[], int n, int x) {
         else		// else x<a[mid] , x will just to the left of mid
             jump = mid - 1;
     }
-
 }
 
 int BinarySearch(int* a, int l, int r, int k) {
