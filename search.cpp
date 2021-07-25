@@ -2,6 +2,7 @@
 #include "search.h"
 #include <time.h>
 #include <fstream>
+#include <chrono>
 #define oo 1000000007
 using namespace std;
 
@@ -122,12 +123,13 @@ int Fibonaccisearch(int a[], int n, int key)
     return -1;
 }
 
-int runningtime(searchingalgorithms S, int a[], int n, int x)
+double runningtime(searchingalgorithms S, int a[], int n, int x)
 {
-    int start_t = clock();
+    auto t_start = chrono::high_resolution_clock::now();
     S(a, n, x);
-    int end_t = clock();
-    return end_t - start_t;
+    auto t_end = chrono::high_resolution_clock::now();
+    double time_run = chrono::duration<double, std::milli>(t_end - t_start).count();
+    return time_run;
 }
 
 void output(searchingalgorithms S, int a[], int n, int x)
