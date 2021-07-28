@@ -1,6 +1,10 @@
 typedef int (*searchingalgorithms)(int a[], int n, int x);
 
 void input(int*& a, int& n, int& key, int*& b);
+void inputFile(int*& a, int& n, int& key, int*& b, char* filename);
+void outputFile(int*& a, int& n, int& key, char* filename);
+void printoutput(int a[], int b[], int n, int key);
+void input(int*& a, int& n, int& key, int*& b);
 void GenerateSortedData(int*& a, int*& b, int& n);
 int jumpSearch(int a[], int n, int x);
 int Fibonaccisearch(int a[], int n, int x);

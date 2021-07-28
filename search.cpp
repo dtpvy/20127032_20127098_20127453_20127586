@@ -20,6 +20,40 @@ void input(int*& a, int& n, int& key, int*& b)
     }
 }
 
+void inputFile(int*& a, int& n, int& key, int*& b, char* filename)
+{
+    fstream fi(filename, ios::in);
+    fi >> n >> key;
+    a = new int[n];
+    b = new int[n + 1];
+    for (int i = 0; i < n; i++)
+    {
+        fi >> a[i];
+        b[i] = a[i];
+    }
+}
+
+void outputFile(int*& a, int& n, int& key, char* filename)
+{
+    fstream fo(filename, ios::out);
+    fo << n << " " << key << endl;
+    for (int i = 0; i < n; i++)
+    {
+        fo << a[i] << " ";
+    }
+}
+
+void printoutput(int a[], int b[], int n, int key)
+{
+    cout << "1. Jump Search\n";
+    cout << "2. Exponetial Search\n";
+    cout << "3. Fibonacci search\n";
+    cout << "4. All Algorithms\n";
+    cout << "Enter your choice: ";
+    int c;
+    cin >> c;
+}
+
 void GenerateSortedData(int*& a, int*& b, int& n)
 {
     a = new int[n];
@@ -103,8 +137,10 @@ int Fibonaccisearch(int a[], int n, int key)
         fib = fib1 + fib2; //i'th fibonacci
     }
     int flag = 1; //mark the left position
+    if (a[flag] == key) return flag;
     while (fib > 1) {
         int i = min(flag + fib1, n);
+        cout << fib << " " << fib1 << " " << fib2 << " " << i << endl;
         if (a[i] == key) return i; //found the key in the array
         if (a[i] < key) {
             //the key belongs in the range from i to fib so the subarray is considered to have fib2 elements
@@ -135,7 +171,7 @@ double runningtime(searchingalgorithms S, int a[], int n, int x)
 void output(searchingalgorithms S, int a[], int n, int x)
 {
     int i = S(a, n, x);
-    if (i > 0)
+    if (i != -1)
     {
         cout << "Found " << x << " at index: " << i << endl;
     }
