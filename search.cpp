@@ -27,7 +27,7 @@ bool inputFile(int*& a, int& n, int& key, int*& b, string filename)
     for (int i = 0; i < n; i++)
     {
         fi >> a[i];
-        b[i] = a[i];
+        b[i+1] = a[i];
     }
     return 1;
 }
@@ -156,9 +156,6 @@ int Fibonaccisearch(int a[], int n, int key)
     if (a[flag] == key) return flag;
     while (fib > 1) {
         int i = min(flag + fib1, n);
-
-        //cout << fib << " " << fib1 << " " << fib2 << " " << i << endl; (debug)
-
         if (a[i] == key) return i; //found the key in the array
         if (a[i] < key) {
             //the key belongs in the range from i to fib so the subarray is considered to have fib2 elements

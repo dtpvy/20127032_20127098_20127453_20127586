@@ -1,9 +1,4 @@
-#include <iostream>
-#include <cstdlib>
 #include "search.h"
-using namespace std;
-
-
 
 int main()
 {
