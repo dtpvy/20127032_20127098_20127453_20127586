@@ -1,9 +1,17 @@
+#include <iostream>
+
+#include <time.h>
+#include <fstream>
+#include <chrono>
+#define oo 1000000007
+using namespace std;
+
 typedef int (*searchingalgorithms)(int a[], int n, int x);
 
 void input(int*& a, int& n, int& key, int*& b);
-void inputFile(int*& a, int& n, int& key, int*& b, char* filename);
-void outputFile(int*& a, int& n, int& key, char* filename);
-void printoutput(int a[], int b[], int n, int key);
+bool inputFile(int*& a, int& n, int& key, int*& b, string filename);
+bool outputFile(int*& a, int& n, int& key, string filename);
+void printoutput(int a[], int b[], int n, int key, int option);
 void input(int*& a, int& n, int& key, int*& b);
 void GenerateSortedData(int*& a, int*& b, int& n);
 int jumpSearch(int a[], int n, int x);

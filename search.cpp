@@ -1,10 +1,4 @@
-#include <iostream>
 #include "search.h"
-#include <time.h>
-#include <fstream>
-#include <chrono>
-#define oo 1000000007
-using namespace std;
 
 void input(int*& a, int& n, int& key, int*& b)
 {
@@ -20,9 +14,13 @@ void input(int*& a, int& n, int& key, int*& b)
     }
 }
 
-void inputFile(int*& a, int& n, int& key, int*& b, char* filename)
+bool inputFile(int*& a, int& n, int& key, int*& b, string filename)
 {
     fstream fi(filename, ios::in);
+    if (!fi) {
+        cout << "file not exist!" << endl;
+        return 0;
+    }
     fi >> n >> key;
     a = new int[n];
     b = new int[n + 1];
@@ -31,41 +29,59 @@ void inputFile(int*& a, int& n, int& key, int*& b, char* filename)
         fi >> a[i];
         b[i] = a[i];
     }
+    return 1;
 }
 
-void outputFile(int*& a, int& n, int& key, char* filename)
+bool outputFile(int*& a, int& n, int& key, string filename)
 {
     fstream fo(filename, ios::out);
+    if (!fo) {
+        //can't open file
+        return 0;
+    }
     fo << n << " " << key << endl;
     for (int i = 0; i < n; i++)
     {
         fo << a[i] << " ";
     }
+    cout << endl;
+    return 1;
 }
 
-void printoutput(int a[], int b[], int n, int key)
+void printoutput(int a[], int b[], int n, int key, int option)
 {
-    cout << "1. Jump Search\n";
-    cout << "2. Exponetial Search\n";
-    cout << "3. Fibonacci search\n";
-    cout << "4. All Algorithms\n";
-    cout << "Enter your choice: ";
-    int c;
-    cin >> c;
+    if (option == 1 || option == 4) {
+        cout << "jump search: " << endl;
+        cout << "Time: " << runningtime(jumpSearch, a, n, key) << " ms" << endl;
+        output(jumpSearch, a, n, key);
+        cout << "------------------------------------------------------------" << endl;
+    }
+    if (option == 2 || option == 4) {
+        cout << "exponetial search: " << endl;
+        cout << "Time: " << runningtime(ExponetialSearch, a, n, key) << " ms" << endl;
+        output(ExponetialSearch, a, n, key);
+        cout << "------------------------------------------------------------" << endl;
+    }
+    if (option == 3 || option == 4) {
+        cout << "fibonacci search: " << endl;
+        cout << "Time: " << runningtime(Fibonaccisearch, b, n, key) << " ms" << endl;
+        output(Fibonaccisearch, b, n, key);
+        cout << "------------------------------------------------------------" << endl;
+    }
 }
 
 void GenerateSortedData(int*& a, int*& b, int& n)
 {
     a = new int[n];
-    b = new int[n+1];
+    b = new int[n + 1];
     a[0] = rand() % n;
     b[1] = a[0];
     for (int i = 1; i < n; i++)
-	{
+    {
         int x = rand() % n;
-        a[i] = (x >= a[i-1]) ? x : a[i-1] + rand() % 100;
+        a[i] = (x >= a[i - 1]) ? x : a[i - 1] + rand() % 100;
         b[i + 1] = a[i];
-	}
+    }
 }
 
 //jumpSearch
@@ -140,7 +156,9 @@ int Fibonaccisearch(int a[], int n, int key)
     if (a[flag] == key) return flag;
     while (fib > 1) {
         int i = min(flag + fib1, n);
-        cout << fib << " " << fib1 << " " << fib2 << " " << i << endl;
+
+        //cout << fib << " " << fib1 << " " << fib2 << " " << i << endl; (debug)
+        
         if (a[i] == key) return i; //found the key in the array
         if (a[i] < key) {
             //the key belongs in the range from i to fib so the subarray is considered to have fib2 elements
@@ -171,6 +189,7 @@ double runningtime(searchingalgorithms S, int a[], int n, int x)
 void output(searchingalgorithms S, int a[], int n, int x)
 {
     int i = S(a, n, x);
+    if (S == Fibonaccisearch) i--;
     if (i != -1)
     {
         cout << "Found " << x << " at index: " << i << endl;
