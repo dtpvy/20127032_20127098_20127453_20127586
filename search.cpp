@@ -158,7 +158,7 @@ int Fibonaccisearch(int a[], int n, int key)
         int i = min(flag + fib1, n);
 
         //cout << fib << " " << fib1 << " " << fib2 << " " << i << endl; (debug)
-        
+
         if (a[i] == key) return i; //found the key in the array
         if (a[i] < key) {
             //the key belongs in the range from i to fib so the subarray is considered to have fib2 elements
@@ -168,7 +168,7 @@ int Fibonaccisearch(int a[], int n, int key)
             flag = i; //the left position is now i
         }
         else {
-            //the key belongs in the range from flag to flat+fib1-1 so the subarray is considered to have fib1 elements 
+            //the key belongs in the range from flag to flat+fib1-1 so the subarray is considered to have fib1 elements
             fib = fib1; //i'th fibonacci
             fib2 = fib2 - fib1; //i-1'th fibonacci
             fib1 = fib - fib2; //i-2'th fibonacci
@@ -190,7 +190,7 @@ void output(searchingalgorithms S, int a[], int n, int x)
 {
     int i = S(a, n, x);
     if (S == Fibonaccisearch) i--;
-    if (i != -1)
+    if (i >= 0)
     {
         cout << "Found " << x << " at index: " << i << endl;
     }
